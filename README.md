@@ -2,11 +2,27 @@
 
 Внутренний микросервис для подсчёта и хранения рейтингов покерного клуба.
 
+## О проекте
+
+**Стек:** Java 21, Spring Boot 3, PostgreSQL, Flyway, Confluence Kafka
+
+Архитектурные слои (Hexagonal):
+
+- **`domain`** — чистая бизнес-логика без зависимостей на фреймворки. Содержит модели, доменные сервисы и интерфейсы портов (`port/in` — входные use cases, `port/out` — выходные репозитории).
+- **`application`** — реализации use cases, оркестрируют доменную логику.
+- **`infrastructure`** — всё внешнее: JPA-адаптеры для PostgreSQL, Kafka-консьюмеры для приёма событий. Реализует порты из `domain`, домен о них не знает.
+
+---
+
+## Logic Diagram
+
+![Logic Diagram](docs/LogicUMLDiagram.png)
+
 ---
 
 ## Entity Diagram
 
-![Entity Diagram](docs/uml.png)
+![Entity Diagram](docs/EntityClassDiagram.png)
 
 ---
 
